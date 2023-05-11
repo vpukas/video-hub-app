@@ -20,6 +20,6 @@ public class ViewController {
 
     @PostMapping
     public void watchVideo(@AuthenticationPrincipal User user, @PathVariable("id") Long id) {
-        
+        viewService.watchVideo(user, id);
     }
 }
