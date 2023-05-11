@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vpukas.backend.requests.CreateVideoRequest;
+import com.vpukas.backend.responses.VideoDataDTO;
+import com.vpukas.backend.services.VideoDataService;
 import com.vpukas.backend.services.VideoService;
 
 import org.springframework.core.io.ByteArrayResource;
@@ -29,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class VideoController {
     private final VideoService videoService;
+    private final VideoDataService videoDataService;
     @PostMapping()
     public ResponseEntity<String> saveVideo(@RequestParam("video") MultipartFile video,  @RequestParam("preview") MultipartFile preview, @ModelAttribute() CreateVideoRequest createVideoRequest) throws IOException {
         videoService.saveVideo(video, preview, createVideoRequest);
@@ -53,4 +55,8 @@ public class VideoController {
                 .body(new ByteArrayResource(videoService.getVideoById(id).getData()));
     }
 
+    @GetMapping("{id}/data")
+    public ResponseEntity<VideoDataDTO> getVideoData(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(videoDataService.getVideoData(id));
+    }
 }
