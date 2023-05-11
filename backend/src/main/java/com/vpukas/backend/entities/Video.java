@@ -1,20 +1,20 @@
 package com.vpukas.backend.entities;
 
+import java.time.LocalDateTime;
+
 import com.vpukas.backend.enums.Category;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Builder
 public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +25,7 @@ public class Video {
     @Lob
     private byte[] data;
 
-    private Long likes = 0L;
-
-    private Long dislikes = 0L;
-
-    private Long views = 0L;
+    private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -37,6 +33,10 @@ public class Video {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "picture_id")
+    private PreviewPicture picture;
 
     public Video(String name, byte[] data) {
         this.name = name;

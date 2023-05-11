@@ -1,5 +1,7 @@
 package com.vpukas.backend.entities;
 
+import java.time.*;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,9 +15,11 @@ public class View {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "viewer_id")
+    private User viewer;
     @ManyToOne
     @JoinColumn(name = "video_id")
     private Video video;
+
+    private LocalDateTime viewedAt;
 }

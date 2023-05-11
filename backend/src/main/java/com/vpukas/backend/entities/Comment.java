@@ -1,5 +1,7 @@
 package com.vpukas.backend.entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +28,5 @@ public class Comment {
 
     private String text;
 
-    private Long likes;
-
-    private Long dislikes;
+    private LocalDateTime commentedAt;
 }

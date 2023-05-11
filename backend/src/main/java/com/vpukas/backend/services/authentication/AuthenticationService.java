@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vpukas.backend.entities.Token;
-import  com.vpukas.backend.entities.User;
+import com.vpukas.backend.entities.User;
 import com.vpukas.backend.enums.Role;
 import com.vpukas.backend.enums.TokenType;
 import com.vpukas.backend.repositories.TokenRepository;

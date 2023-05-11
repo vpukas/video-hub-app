@@ -25,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("api/v1/videos")
 @RequiredArgsConstructor
-@CrossOrigin(origins="http://localhost:3000")
 public class VideoController {
     private final VideoService videoService;
     @PostMapping()
