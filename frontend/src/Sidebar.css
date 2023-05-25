@@ -1,7 +1,7 @@
 .sidebar {
     flex: 0.2;
-    padding: 20px 5px;
     background-color: #023047;
+    position: fixed;
   }
   
   .sidebar > hr {
@@ -11,4 +11,5 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
+
   

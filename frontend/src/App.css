@@ -1,4 +1,7 @@
 .app__page {
   display: flex;
+  background-color: #023047;
+}
+.app {
   background-color: #023047
 }

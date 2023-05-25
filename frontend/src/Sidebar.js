@@ -11,12 +11,14 @@ import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 
-function Sidebar() {
+function Sidebar(props) {
+  const { show } = props;
+  
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{ transform: show ? 'translateX(0)': 'translateX(-100%)' }}>
       <SidebarRow title="Home" Icon={HomeIcon} />
       <SidebarRow title="Trending" Icon={WhatshotIcon} />
-      <SidebarRow title="Subscription" Icon={SubscriptionsIcon}  />
+      <SidebarRow title="Subscription" Icon={SubscriptionsIcon} />
       <hr />
       <SidebarRow title="Library" Icon={VideoLibraryIcon} />
       <SidebarRow title="History" Icon={HistoryIcon} />
