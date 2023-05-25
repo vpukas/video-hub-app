@@ -25,16 +25,16 @@ public class VideoRateService {
                 .build());
     }
 
-    public void changeVideoRate(User user, Long videoId, ChangeVideoRateDTO changeVideoRateDTO) {
-        View view = viewService.getView(user, videoId);
-        VideoRate videoRate = this.getVideoRate(view, user);
-        videoRate.setStatus(changeVideoRateDTO.getLikeStatus());
-        videoRateRepository.save(videoRate);
+    // public void changeVideoRate(User user, Long videoId, ChangeVideoRateDTO changeVideoRateDTO) {
+    //     View view = viewService.getView(user, videoId);
+    //     // VideoRate videoRate = this.getVideoRate(view, user);
+    //     videoRate.setStatus(changeVideoRateDTO.getLikeStatus());
+    //     videoRateRepository.save(videoRate);
 
-    }
+    // }
 
-    public VideoRate getVideoRate(View view, User user) {
-        return videoRateRepository.findByViewAndUser(view, user)
-                .orElseThrow(() -> new RuntimeException("Video rate not found"));
-    }
+    // public VideoRate getVideoRate(View view, User user) {
+    //     // return videoRateRepository.findByViewAndUser(view, user)
+    //     //         .orElseThrow(() -> new RuntimeException("Video rate not found"));
+    // }
 }

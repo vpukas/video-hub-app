@@ -18,8 +18,8 @@ public class ViewController {
     
     private final ViewService viewService;
 
-    @PostMapping
-    public void watchVideo(@AuthenticationPrincipal User user, @PathVariable("id") Long id) {
-        viewService.watchVideo(user, id);
-    }
+    // @PostMapping
+    // public void watchVideo(@AuthenticationPrincipal User user, @PathVariable("id") Long id) {
+    //     viewService.watchVideo(user, id);
+    // }
 }

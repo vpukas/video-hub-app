@@ -1,10 +1,12 @@
 package com.vpukas.backend.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.vpukas.backend.entities.User;
 import com.vpukas.backend.requests.CreateVideoRequest;
+import com.vpukas.backend.responses.VideoCardDTO;
 import com.vpukas.backend.responses.VideoDataDTO;
 import com.vpukas.backend.services.VideoDataService;
 import com.vpukas.backend.services.VideoService;
+
+import io.micrometer.core.ipc.http.HttpSender.Response;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -32,8 +38,8 @@ public class VideoController {
     private final VideoService videoService;
     private final VideoDataService videoDataService;
     @PostMapping()
-    public ResponseEntity<String> saveVideo(@RequestParam("video") MultipartFile video,  @RequestParam("preview") MultipartFile preview, @ModelAttribute() CreateVideoRequest createVideoRequest) throws IOException {
-        videoService.saveVideo(video, preview, createVideoRequest);
+    public ResponseEntity<String> saveVideo(@AuthenticationPrincipal User user,@RequestParam("video") MultipartFile video,  @RequestParam("preview") MultipartFile preview, @ModelAttribute() CreateVideoRequest createVideoRequest) throws IOException {
+        videoService.saveVideo(video, preview, createVideoRequest, user);
         return ResponseEntity.ok("Video saved successfully.");
     }
 
@@ -58,5 +64,10 @@ public class VideoController {
     @GetMapping("{id}/data")
     public ResponseEntity<VideoDataDTO> getVideoData(@PathVariable("id") Long id) {
         return ResponseEntity.ok(videoDataService.getVideoData(id));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<VideoCardDTO>> getRecommendedVideos(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(videoDataService.getRecommendedVideos(user));
     }
 }

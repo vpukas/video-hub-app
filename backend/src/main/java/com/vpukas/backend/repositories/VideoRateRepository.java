@@ -12,6 +12,6 @@ import com.vpukas.backend.entities.View;
 
 @Repository
 public interface VideoRateRepository extends JpaRepository<VideoRate, Long> {
-    @Query("SELECT vr from video_rate vr where vr.viewer = :user and vr.view = :view")
-    Optional<VideoRate> findByViewAndUser(View view, User user);
+    // @Query("SELECT vr from VideoRate vr where vr.viewer = :user and vr.view = :view")
+    // Optional<VideoRate> findByViewAndUser(View view, User user);
 }

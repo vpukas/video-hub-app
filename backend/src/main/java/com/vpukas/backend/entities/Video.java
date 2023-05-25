@@ -27,8 +27,8 @@ public class Video {
 
     private LocalDateTime createdAt;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    // @Enumerated(EnumType.STRING)
+    // private Category category;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

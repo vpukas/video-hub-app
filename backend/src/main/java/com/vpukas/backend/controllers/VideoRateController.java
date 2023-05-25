@@ -19,10 +19,10 @@ import lombok.RequiredArgsConstructor;
 public class VideoRateController {
     private final VideoRateService videoRateService;
 
-    @PostMapping
-    public void changeVideoRate(@AuthenticationPrincipal User user,
-            @PathVariable("id") Long id,
-            @RequestBody ChangeVideoRateDTO changeVideoRateDTO) {
-        videoRateService.changeVideoRate(user, id, changeVideoRateDTO);
-    }
+    // @PostMapping
+    // public void changeVideoRate(@AuthenticationPrincipal User user,
+    //         @PathVariable("id") Long id,
+    //         @RequestBody ChangeVideoRateDTO changeVideoRateDTO) {
+    //     videoRateService.changeVideoRate(user, id, changeVideoRateDTO);
+    // }
 }

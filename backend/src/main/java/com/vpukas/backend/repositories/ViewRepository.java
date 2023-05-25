@@ -12,6 +12,6 @@ import com.vpukas.backend.entities.View;
 
 @Repository
 public interface ViewRepository extends JpaRepository<View, Long> {
-    @Query("SELECT v from view v where v.viewer = :user and v.video = :video")
-    Optional<View> findByUserAndVideo(User user, Video video);
+    // @Query("SELECT v from view v where v.viewer = :user and v.video = :video")
+    // Optional<View> findByUserAndVideo(User user, Video video);
 }

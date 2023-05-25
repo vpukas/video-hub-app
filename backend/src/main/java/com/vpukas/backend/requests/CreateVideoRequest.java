@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateVideoRequest {
     private String name;
-    private Category category;
+    // private Category category;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vpukas.backend.entities.PreviewPicture;
+import com.vpukas.backend.entities.User;
 import com.vpukas.backend.entities.Video;
 import com.vpukas.backend.exceptions.VideoAlreadyExistsException;
 import com.vpukas.backend.repositories.VideoRepository;
@@ -39,7 +40,7 @@ public class VideoService {
         return videoOpt.orElseThrow(() -> new RuntimeException("Video does not exist"));
     }
 
-    public void saveVideo(MultipartFile video, MultipartFile preview, CreateVideoRequest createVideoRequest)
+    public void saveVideo(MultipartFile video, MultipartFile preview, CreateVideoRequest createVideoRequest, User user)
             throws IOException {
         if (videoRepository.existsByName(createVideoRequest.getName())) {
             throw new VideoAlreadyExistsException();
@@ -49,8 +50,9 @@ public class VideoService {
                 .createdAt(LocalDateTime.now())
                 .data(video.getBytes())
                 .name(createVideoRequest.getName())
+                .user(user)
                 .build();
-        newVideo.setCategory(createVideoRequest.getCategory());
+        // newVideo.setCategory(createVideoRequest.getCategory());
         newVideo.setPicture(previewPicture);
         videoRepository.save(newVideo);
     }
