@@ -1,6 +1,7 @@
 package com.vpukas.backend.services;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,5 +20,11 @@ public class PreviewPictureService {
         return pictureRepository.save(PreviewPicture.builder()
                 .data(preview.getBytes())
                 .build());
+    }
+
+    public byte[] getPreviewPicture(Long id) {
+        Optional<PreviewPicture> previewPictureOptional = pictureRepository.findById(id);
+
+        return previewPictureOptional.orElseThrow().getData();
     }
 }

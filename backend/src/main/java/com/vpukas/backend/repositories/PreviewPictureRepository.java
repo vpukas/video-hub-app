@@ -7,5 +7,4 @@ import com.vpukas.backend.entities.PreviewPicture;
 
 @Repository
 public interface PreviewPictureRepository extends JpaRepository<PreviewPicture, Long> {
-    
 }

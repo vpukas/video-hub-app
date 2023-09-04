@@ -1,13 +1,12 @@
 package com.vpukas.backend.services;
 
+import com.vpukas.backend.entities.Video;
+import com.vpukas.backend.entities.View;
 import org.springframework.stereotype.Service;
 
 import com.vpukas.backend.entities.User;
 import com.vpukas.backend.entities.VideoRate;
-import com.vpukas.backend.entities.View;
-import com.vpukas.backend.enums.LikeStatus;
 import com.vpukas.backend.repositories.VideoRateRepository;
-import com.vpukas.backend.requests.ChangeVideoRateDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,24 +16,29 @@ public class VideoRateService {
     private final VideoRateRepository videoRateRepository;
     private final ViewService viewService;
 
-    public VideoRate initVideoRate(User user, View view) {
-        return videoRateRepository.save(VideoRate.builder()
-                .view(view)
+    public void initVideoRate(User user, Video video) {
+        videoRateRepository.save(VideoRate.builder()
                 .viewer(user)
-                .status(LikeStatus.NoStatus)
+                .video(video)
+                .rate(false)
                 .build());
     }
 
-    // public void changeVideoRate(User user, Long videoId, ChangeVideoRateDTO changeVideoRateDTO) {
-    //     View view = viewService.getView(user, videoId);
-    //     // VideoRate videoRate = this.getVideoRate(view, user);
-    //     videoRate.setStatus(changeVideoRateDTO.getLikeStatus());
-    //     videoRateRepository.save(videoRate);
+    public void like(User user, Video video) {
+        VideoRate videoRate = videoRateRepository.findVideoRateByVideoAndViewer(video, user).orElseThrow();
+        videoRate.setRate(true);
+        videoRateRepository.save(videoRate);
 
-    // }
+    }
 
-    // public VideoRate getVideoRate(View view, User user) {
-    //     // return videoRateRepository.findByViewAndUser(view, user)
-    //     //         .orElseThrow(() -> new RuntimeException("Video rate not found"));
-    // }
+    public void dislike(User user, Video video) {
+        VideoRate videoRate = videoRateRepository.findVideoRateByVideoAndViewer(video, user).orElseThrow();
+        videoRate.setRate(false);
+        videoRateRepository.save(videoRate);
+    }
+
+    public Long likesCount(Video video) {
+        return videoRateRepository.countAllByVideoAndRateIsTrue(video);
+    }
+
 }

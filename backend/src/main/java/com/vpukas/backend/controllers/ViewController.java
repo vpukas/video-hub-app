@@ -1,5 +1,7 @@
 package com.vpukas.backend.controllers;
 
+import com.vpukas.backend.entities.Video;
+import com.vpukas.backend.repositories.VideoRepository;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +19,11 @@ import lombok.RequiredArgsConstructor;
 public class ViewController {
     
     private final ViewService viewService;
+    private final VideoRepository videoRepository;
 
-    // @PostMapping
-    // public void watchVideo(@AuthenticationPrincipal User user, @PathVariable("id") Long id) {
-    //     viewService.watchVideo(user, id);
-    // }
+     @PostMapping("/watch")
+     public void watchVideo(@AuthenticationPrincipal User user, @PathVariable("id") Long id) {
+         Video video = videoRepository.findById(id).orElseThrow();
+         viewService.watchVideo(user, video);
+     }
 }

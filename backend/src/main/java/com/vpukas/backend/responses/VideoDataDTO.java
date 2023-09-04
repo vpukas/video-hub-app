@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 public class VideoDataDTO {
     private Long videoId;
     private Long likes;
-    private Long dislikes;
     private Long comments;
     private Long views;
-    // private Category category;
+    private String title;
+    private String channel;
+    private Long channelId;
 }

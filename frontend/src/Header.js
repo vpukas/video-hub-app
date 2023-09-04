@@ -43,8 +43,7 @@ function Header(props) {
                 </Link>
             </div>
             <div className="header__right">
-                <VideoCallIcon style={{ color: "#000000", marginLeft: "10px" }} />
-                <NotificationsIcon style={{ color: "#000000", marginLeft: "20px" }} />
+                <Link to="/upload"><VideoCallIcon style={{ color: "#000000", marginLeft: "10px" }} /></Link>
                 <Avatar
                     style={{ height: "30px", width: "30px", marginLeft: "20px" }}
                     className="avatar"

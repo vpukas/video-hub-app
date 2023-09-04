@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class VideoService {
     private final VideoRepository videoRepository;
     private final PreviewPictureService pictureService;
+    private final VideoRateService videoRateService;
 
     public Video getVideoByName(String name) {
         if (!videoRepository.existsByName(name)) {
@@ -52,8 +53,12 @@ public class VideoService {
                 .name(createVideoRequest.getName())
                 .user(user)
                 .build();
+
+
         // newVideo.setCategory(createVideoRequest.getCategory());
+
         newVideo.setPicture(previewPicture);
-        videoRepository.save(newVideo);
+        newVideo = videoRepository.save(newVideo);
+        videoRateService.initVideoRate(user, newVideo);
     }
 }

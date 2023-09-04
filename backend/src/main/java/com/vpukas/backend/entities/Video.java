@@ -1,9 +1,6 @@
 package com.vpukas.backend.entities;
 
 import java.time.LocalDateTime;
-
-import com.vpukas.backend.enums.Category;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

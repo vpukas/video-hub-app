@@ -1,0 +1,32 @@
+/* Channel Header Styles */
+.channel-header {
+    /* text-align: center; */
+    padding: 25px;
+    background-color: #023047; /* Background color similar to .recommendedvideos */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row; /* Arrange elements in one row */
+    margin-top: 80px; /* Add margin-top to separate it from the existing header */
+}
+
+.channel-avatar {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    /* margin-top: -50px; */
+    border: 3px solid #3498db; /* Border color */
+    margin-right: 20px; /* Add margin to separate avatar from text */
+}
+
+.channel-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #fff; /* Text color for channel title */
+}
+
+.channel-subscribers {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #fff; /* Text color for subscriber count */
+}

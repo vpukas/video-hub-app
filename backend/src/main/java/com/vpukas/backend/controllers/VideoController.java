@@ -3,6 +3,8 @@ package com.vpukas.backend.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import com.vpukas.backend.services.PreviewPictureService;
+import com.vpukas.backend.services.ViewService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,20 +39,22 @@ import lombok.RequiredArgsConstructor;
 public class VideoController {
     private final VideoService videoService;
     private final VideoDataService videoDataService;
+    private final PreviewPictureService pictureService;
+
     @PostMapping()
     public ResponseEntity<String> saveVideo(@AuthenticationPrincipal User user,@RequestParam("video") MultipartFile video,  @RequestParam("preview") MultipartFile preview, @ModelAttribute() CreateVideoRequest createVideoRequest) throws IOException {
         videoService.saveVideo(video, preview, createVideoRequest, user);
         return ResponseEntity.ok("Video saved successfully.");
     }
 
-    @GetMapping("{name}")
-    @Transactional
-    public ResponseEntity<Resource> getVideoByName(@PathVariable("name") String name){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(new ByteArrayResource(videoService.getVideoByName(name).getData()));
-    }
+//    @GetMapping("{name}")
+//    @Transactional
+//    public ResponseEntity<Resource> getVideoByName(@PathVariable("name") String name){
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                .body(new ByteArrayResource(videoService.getVideoByName(name).getData()));
+//    }
 
     @GetMapping("{id}")
     @Transactional
@@ -70,4 +74,19 @@ public class VideoController {
     public ResponseEntity<List<VideoCardDTO>> getRecommendedVideos(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(videoDataService.getRecommendedVideos(user));
     }
+
+    @GetMapping("/history")
+    public ResponseEntity<List<VideoCardDTO>> getWatchedVideos(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(videoDataService.getWatchedVideos(user));
+    }
+
+    @GetMapping("{previewId}/image")
+    @Transactional
+    public ResponseEntity<byte[]> getVideoPreviewById(@PathVariable("previewId") Long previewId) {
+        byte[] preview = pictureService.getPreviewPicture(previewId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .contentType(MediaType.valueOf("image/png")).body(preview);
+    }
+
 }

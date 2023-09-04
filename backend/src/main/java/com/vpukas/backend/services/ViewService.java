@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ViewService {
-    // private final ViewRepository viewRepository;
+     private final ViewRepository viewRepository;
     // private final VideoService videoService;
     // private final VideoRateService videoRateService;
 
@@ -42,4 +42,19 @@ public class ViewService {
     //     return viewRepository.findByUserAndVideo(user, videoService.getVideoById(videoId))
     //             .orElseThrow(() -> new RuntimeException("View not found"));
     // }
+
+    public Long countViews(Video video) {
+        return viewRepository.countViewsByVideo(video);
+    }
+
+    public void watchVideo(User user, Video video) {
+        Optional<View> viewOptional = viewRepository.findByVideoAndViewer(video, user);
+        if(viewOptional.isEmpty()) {
+            viewRepository.save(View.builder()
+                    .viewedAt(LocalDateTime.now())
+                    .video(video)
+                    .viewer(user)
+                    .build());
+        }
+    }
 }

@@ -4,11 +4,11 @@ import VideoCard from "./VideoCard";
 import axios from 'axios';
 
 function RecommendedVideos() {
-  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXIzQGdtYWlsLmNvbSIsImlhdCI6MTY4NTAyMTkxOSwiZXhwIjoxNjg1MDIzMzU5fQ.FGiApsRzcLNeqZYmgNykfHl7trxfP0Zsv_cc_pfp7ho');
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [videos, setVideos] = useState([]);
 
   const getVideos = () => {
-    axios.get('api/v1/videos', {
+    axios.get('http://localhost:8080/api/v1/videos', {
       headers: {
         Authorization: 'Bearer ' + token
       }
@@ -17,6 +17,7 @@ function RecommendedVideos() {
       setVideos(response.data);
     });
   };
+
 
   useEffect(() => {
     getVideos();
@@ -31,10 +32,9 @@ function RecommendedVideos() {
             id={video.id}
             title={video.title}
             views={video.views}
-            image="./logo.svg"
-            channel={video.chanelName}
+            channel={video.channelName}
             channelImage="./logo.svg"
-            channelUrl=""
+            channelId={video.channelId}
           />
         ))}
       </div>

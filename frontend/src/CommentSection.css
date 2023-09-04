@@ -1,0 +1,60 @@
+/* CommentSection.css */
+
+/* Container for the comment section */
+.comment-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Heading for the comment section */
+.comment-heading {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Textarea for entering new comments */
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Button to submit a new comment */
+.comment-submit-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.comment-submit-button:hover {
+    background-color: #2980b9;
+}
+
+/* List of comments */
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Individual comment item */
+.comment-item {
+    background-color: #fff; /* Comment background color */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.comment-item:hover {
+    background-color: #f9f9f9; /* Highlighted background color on hover */
+}
+
+/* Add more styles as needed */

@@ -1,8 +1,5 @@
 package com.vpukas.backend.entities;
 
-
-import com.vpukas.backend.enums.LikeStatus;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,11 +20,10 @@ public class VideoRate {
     @JoinColumn(name = "viewer_id")
     private User viewer;
 
-    @OneToOne
-    @JoinColumn(name = "view_id")
-    private View view;
+    @ManyToOne
+    @JoinColumn(name = "video_id")
+    private Video video;
 
-    @Enumerated(EnumType.STRING)
-    private LikeStatus status;
+    private Boolean rate;
 
 }
